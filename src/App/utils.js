@@ -31,6 +31,11 @@ export function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
+export function focusLastInput() {
+  let inputs = document.getElementsByTagName("input");
+  inputs[inputs.length - 1].focus();
+}
+
 export function getDefaultSauces() {
   return [
     "hummus",

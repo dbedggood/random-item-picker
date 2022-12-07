@@ -1,6 +1,7 @@
 <script>
   import { afterUpdate } from "svelte";
   import {
+    focusLastInput,
     getDefaultSauces,
     getNewInputItem,
     getRandomInt,
@@ -44,10 +45,7 @@
     }
   }
 
-  afterUpdate(() => {
-    let inputs = document.getElementsByTagName("input");
-    inputs[inputs.length - 1].focus();
-  });
+  afterUpdate(focusLastInput);
 </script>
 
 <PickButton {inputItems} {handlePickItem} />
