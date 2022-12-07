@@ -6,4 +6,4 @@
 <button disabled={!inputItems.at(0).value} on:click={handlePickItem}>
   pick
 </button>
-an option
+a random option
