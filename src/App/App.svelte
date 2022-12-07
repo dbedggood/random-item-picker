@@ -1,11 +1,12 @@
 <script>
   import { afterUpdate } from "svelte";
   import {
+    getDefaultSauces,
     getNewInputItem,
     getRandomInt,
     removeItemFromArray,
-    getDefaultSauces,
   } from "./utils";
+  import { AddButton, PickButton } from "./components";
 
   let inputItems = getDefaultSauces();
   let pickedItems = [];
@@ -49,10 +50,7 @@
   });
 </script>
 
-<button disabled={!inputItems.at(0).value} on:click={handlePickItem}>
-  pick
-</button>
-an option
+<PickButton {inputItems} {handlePickItem} />
 
 {#each inputItems as { id, value }, index (id)}
   <div>
@@ -72,10 +70,7 @@ an option
   </div>
 {/each}
 
-<button disabled={!inputItems.at(-1).value} on:click={handleAddNewInput}>
-  add
-</button>
-an option
+<AddButton {inputItems} {handleAddNewInput} />
 
 <ol>
   {#each pickedItems as { id, value } (id)}
