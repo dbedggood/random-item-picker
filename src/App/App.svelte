@@ -1,5 +1,5 @@
 <script>
-  import { afterUpdate } from "svelte";
+  import { onMount } from "svelte";
   import {
     focusLastInput,
     getDefaultSauces,
@@ -8,6 +8,7 @@
     removeItemFromArray,
   } from "./utils";
   import { AddButton, PickButton } from "./components";
+  import InputItem from "./components/InputItem/InputItem.svelte";
 
   let inputItems = getDefaultSauces();
   let pickedItems = [];
@@ -21,6 +22,7 @@
 
     if (hasEmptyInputs && firstEmptyInputIndex !== inputItemsLastIndex) {
       inputItems = removeItemFromArray(inputItems, firstEmptyInputIndex);
+      focusLastInput();
     }
   }
 
@@ -32,6 +34,7 @@
 
   function handleAddNewInput() {
     inputItems = [...inputItems, getNewInputItem()];
+    focusLastInput();
   }
 
   function handlePickItem() {
@@ -40,32 +43,26 @@
     pickedItems = [...pickedItems, inputItems[pickedInputItemIndex]];
     if (inputItems.length > 1) {
       inputItems = removeItemFromArray(inputItems, pickedInputItemIndex);
+      focusLastInput();
     } else {
       inputItems[0] = getNewInputItem();
     }
   }
 
-  afterUpdate(focusLastInput);
+  onMount(focusLastInput);
 </script>
 
 <PickButton {inputItems} {handlePickItem} />
 
 {#each inputItems as { id, value }, index (id)}
-  <div>
-    <input
-      {id}
-      {value}
-      autocomplete="off"
-      on:input={(event) => {
-        handleInputChange(event, index);
-      }}
-      on:keypress={(event) => {
-        if (event.key === "Enter") {
-          handleAddNewInput();
-        }
-      }}
-    />
-  </div>
+  <InputItem
+    {id}
+    {value}
+    {handleAddNewInput}
+    handleInputChange={(event) => {
+      handleInputChange(event, index);
+    }}
+  />
 {/each}
 
 <AddButton {inputItems} {handleAddNewInput} />
