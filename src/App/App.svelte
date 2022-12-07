@@ -1,17 +1,21 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import {
-    focusLastInput,
     getDefaultSauces,
     getNewInputItem,
     getRandomInt,
     removeItemFromArray,
   } from "./utils";
-  import { AddButton, PickButton } from "./components";
-  import InputItem from "./components/InputItem/InputItem.svelte";
+  import { AddButton, PickButton, InputItem } from "./components";
 
   let inputItems = getDefaultSauces();
   let pickedItems = [];
+
+  async function focusLastInput() {
+    await tick;
+    let inputs = document.getElementsByTagName("input");
+    inputs[inputs.length - 1].focus();
+  }
 
   $: {
     const hasEmptyInputs = inputItems.some(({ value }) => value === "");
@@ -19,7 +23,6 @@
       ({ value }) => value === ""
     );
     const inputItemsLastIndex = inputItems.length - 1;
-
     if (hasEmptyInputs && firstEmptyInputIndex !== inputItemsLastIndex) {
       inputItems = removeItemFromArray(inputItems, firstEmptyInputIndex);
       focusLastInput();
@@ -32,12 +35,14 @@
     }
   }
 
-  function handleAddNewInput() {
-    inputItems = [...inputItems, getNewInputItem()];
+  async function handleAddNewInput() {
+    if (inputItems.at(-1).value) {
+      inputItems = [...inputItems, getNewInputItem()];
+    }
     focusLastInput();
   }
 
-  function handlePickItem() {
+  async function handlePickItem() {
     const populatedInputItems = inputItems.filter(({ value }) => value);
     const pickedInputItemIndex = getRandomInt(populatedInputItems.length);
     pickedItems = [...pickedItems, inputItems[pickedInputItemIndex]];
@@ -65,7 +70,7 @@
   />
 {/each}
 
-<AddButton {inputItems} {handleAddNewInput} />
+<AddButton disabled={!inputItems.at(-1).value} {handleAddNewInput} />
 
 <ol>
   {#each pickedItems as { id, value } (id)}
