@@ -35,14 +35,14 @@
     }
   }
 
-  async function handleAddNewInput() {
+  function handleAddNewInput() {
     if (inputItems.at(-1).value) {
       inputItems = [...inputItems, getNewInputItem()];
     }
     focusLastInput();
   }
 
-  async function handlePickItem() {
+  function handlePickItem() {
     const populatedInputItems = inputItems.filter(({ value }) => value);
     const pickedInputItemIndex = getRandomInt(populatedInputItems.length);
     pickedItems = [...pickedItems, inputItems[pickedInputItemIndex]];
