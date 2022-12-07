@@ -8,7 +8,8 @@
   } from "./utils";
   import { AddButton, PickButton, InputItem } from "./components";
 
-  let inputItems = getDefaultSauces();
+  let inputItems = [...getDefaultSauces(), getNewInputItem()];
+  $: isLastInputPopulated = inputItems.at(-1).value;
   let pickedItems = [];
 
   async function focusLastInput() {
@@ -36,7 +37,7 @@
   }
 
   function handleAddNewInput() {
-    if (inputItems.at(-1).value) {
+    if (isLastInputPopulated) {
       inputItems = [...inputItems, getNewInputItem()];
     }
     focusLastInput();
@@ -70,7 +71,7 @@
   />
 {/each}
 
-<AddButton disabled={!inputItems.at(-1).value} {handleAddNewInput} />
+<AddButton disabled={!isLastInputPopulated} {handleAddNewInput} />
 
 <ol>
   {#each pickedItems as { id, value } (id)}
