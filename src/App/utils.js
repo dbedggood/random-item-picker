@@ -1,3 +1,5 @@
+import { tick } from "svelte";
+
 function S4() {
   return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
 }
@@ -29,6 +31,14 @@ export function removeItemFromArray(array, index) {
 
 export function getRandomInt(max) {
   return Math.floor(Math.random() * max);
+}
+
+export async function updateFocus() {
+  await tick;
+  if (document.activeElement.tagName !== "BUTTON") {
+    let inputs = document.getElementsByTagName("input");
+    inputs[inputs.length - 1].focus();
+  }
 }
 
 export function getDefaultSauces() {

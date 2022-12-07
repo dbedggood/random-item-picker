@@ -1,6 +1,7 @@
 <script>
-  import { onMount, tick } from "svelte";
+  import { onMount } from "svelte";
   import {
+    updateFocus,
     getDefaultSauces,
     getNewInputItem,
     getRandomInt,
@@ -12,12 +13,6 @@
   $: isLastInputPopulated = inputItems.at(-1).value;
   let pickedItems = [];
 
-  async function focusLastInput() {
-    await tick;
-    let inputs = document.getElementsByTagName("input");
-    inputs[inputs.length - 1].focus();
-  }
-
   $: {
     const hasEmptyInputs = inputItems.some(({ value }) => value === "");
     const firstEmptyInputIndex = inputItems.findIndex(
@@ -26,7 +21,7 @@
     const inputItemsLastIndex = inputItems.length - 1;
     if (hasEmptyInputs && firstEmptyInputIndex !== inputItemsLastIndex) {
       inputItems = removeItemFromArray(inputItems, firstEmptyInputIndex);
-      focusLastInput();
+      updateFocus();
     }
   }
 
@@ -40,7 +35,7 @@
     if (isLastInputPopulated) {
       inputItems = [...inputItems, getNewInputItem()];
     }
-    focusLastInput();
+    updateFocus();
   }
 
   function handlePickItem() {
@@ -49,13 +44,13 @@
     pickedItems = [...pickedItems, inputItems[pickedInputItemIndex]];
     if (inputItems.length > 1) {
       inputItems = removeItemFromArray(inputItems, pickedInputItemIndex);
-      focusLastInput();
+      updateFocus();
     } else {
       inputItems[0] = getNewInputItem();
     }
   }
 
-  onMount(focusLastInput);
+  onMount(updateFocus);
 </script>
 
 <PickButton {inputItems} {handlePickItem} />
