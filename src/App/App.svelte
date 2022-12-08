@@ -10,8 +10,8 @@
   import { AddButton, InputItem, PickButton, ResetButton } from "./components";
 
   let inputItems = [...getDefaultSauces(), getNewInputItem()];
-  $: isFirstInputPopulated = inputItems.at(0).value;
-  $: isLastInputPopulated = inputItems.at(-1).value;
+  $: isFirstInputPopulated = inputItems.at(0).value.trim();
+  $: isLastInputPopulated = inputItems.at(-1).value.trim();
   let pickedItems = [];
 
   $: {
