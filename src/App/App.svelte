@@ -75,3 +75,10 @@
     </li>
   {/each}
 </ol>
+
+<button
+  on:click={() => {
+    inputItems = [...inputItems, ...pickedItems, getNewInputItem()];
+    pickedItems = [];
+  }}>reset</button
+> picked options
