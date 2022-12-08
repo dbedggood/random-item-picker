@@ -82,4 +82,4 @@
   {/each}
 </ol>
 
-<ResetButton {handleResetPickedItems} />
+<ResetButton disabled={pickedItems.length < 1} {handleResetPickedItems} />

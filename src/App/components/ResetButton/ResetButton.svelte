@@ -1,5 +1,6 @@
 <script>
+  export let disabled;
   export let handleResetPickedItems;
 </script>
 
-<button on:click={handleResetPickedItems}>reset</button> picked options
+<button {disabled} on:click={handleResetPickedItems}>reset</button> picked options
