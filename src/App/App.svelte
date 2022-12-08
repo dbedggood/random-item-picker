@@ -7,7 +7,7 @@
     getRandomInt,
     removeItemFromArray,
   } from "./utils";
-  import { AddButton, PickButton, InputItem } from "./components";
+  import { AddButton, InputItem, PickButton, ResetButton } from "./components";
 
   let inputItems = [...getDefaultSauces(), getNewInputItem()];
   $: isLastInputPopulated = inputItems.at(-1).value;
@@ -50,6 +50,11 @@
     }
   }
 
+  function handleResetPickedItems() {
+    inputItems = [...inputItems, ...pickedItems, getNewInputItem()];
+    pickedItems = [];
+  }
+
   onMount(updateFocus);
 </script>
 
@@ -76,9 +81,4 @@
   {/each}
 </ol>
 
-<button
-  on:click={() => {
-    inputItems = [...inputItems, ...pickedItems, getNewInputItem()];
-    pickedItems = [];
-  }}>reset</button
-> picked options
+<ResetButton {handleResetPickedItems} />
