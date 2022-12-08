@@ -15,9 +15,9 @@
   let pickedItems = [];
 
   $: {
-    const hasEmptyInputs = inputItems.some(({ value }) => value === "");
+    const hasEmptyInputs = inputItems.some(({ value }) => value.trim() === "");
     const firstEmptyInputIndex = inputItems.findIndex(
-      ({ value }) => value === ""
+      ({ value }) => value.trim() === ""
     );
     const inputItemsLastIndex = inputItems.length - 1;
     if (hasEmptyInputs && firstEmptyInputIndex !== inputItemsLastIndex) {
@@ -40,7 +40,7 @@
   }
 
   function handlePickItem() {
-    const populatedInputItems = inputItems.filter(({ value }) => value);
+    const populatedInputItems = inputItems.filter(({ value }) => value.trim());
     const pickedInputItemIndex = getRandomInt(populatedInputItems.length);
     pickedItems = [...pickedItems, inputItems[pickedInputItemIndex]];
     if (inputItems.length > 1) {
