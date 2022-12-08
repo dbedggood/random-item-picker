@@ -1,13 +1,7 @@
 <script>
-  export let inputItems;
+  export let disabled;
   export let handlePickItem;
 </script>
 
-<button
-  id="pick-button"
-  disabled={!inputItems.at(0).value}
-  on:click={handlePickItem}
->
-  pick
-</button>
+<button id="pick-button" {disabled} on:click={handlePickItem}> pick </button>
 a random option

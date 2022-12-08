@@ -10,6 +10,7 @@
   import { AddButton, InputItem, PickButton, ResetButton } from "./components";
 
   let inputItems = [...getDefaultSauces(), getNewInputItem()];
+  $: isFirstInputPopulated = inputItems.at(0).value;
   $: isLastInputPopulated = inputItems.at(-1).value;
   let pickedItems = [];
 
@@ -58,7 +59,7 @@
   onMount(updateFocus);
 </script>
 
-<PickButton {inputItems} {handlePickItem} />
+<PickButton disabled={!isFirstInputPopulated} {handlePickItem} />
 
 {#each inputItems as { id, value }, index (id)}
   <InputItem
