@@ -98,25 +98,33 @@
 
   :global(body) {
     margin: 0;
+    background-color: #fff;
   }
 
   :global(div#app) {
-    height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
-
-    background-color: #f7f2e6;
-    opacity: 0.8;
-    background-image: radial-gradient(#f7a145 0.5px, transparent 0.5px),
-      radial-gradient(#f7a145 0.5px, #f7f2e6 0.5px);
-    background-size: 20px 20px;
-    background-position: 0 0, 10px 10px;
+    align-items: flex-start;
   }
 
   main {
     padding: 1.5rem;
     border-radius: 2rem;
     background: white;
+  }
+
+  @media (min-width: 500px) {
+    :global(body) {
+      background-color: #f7f2e6;
+      opacity: 0.8;
+      background-image: radial-gradient(#f7a145 0.5px, transparent 0.5px),
+        radial-gradient(#f7a145 0.5px, #f7f2e6 0.5px);
+      background-size: 20px 20px;
+      background-position: 0 0, 10px 10px;
+    }
+
+    main {
+      margin: 1.5rem 0;
+    }
   }
 </style>
