@@ -13,6 +13,7 @@
   $: isFirstInputPopulated = inputItems.at(0).value.trim();
   $: isLastInputPopulated = inputItems.at(-1).value.trim();
   let pickedItems = [];
+  $: hasPickedItems = pickedItems.length > 0;
 
   $: {
     const hasEmptyInputs = inputItems.some(({ value }) => value.trim() === "");
@@ -59,27 +60,63 @@
   onMount(updateFocus);
 </script>
 
-<PickButton disabled={!isFirstInputPopulated} {handlePickItem} />
+<main>
+  <PickButton disabled={!isFirstInputPopulated} {handlePickItem} />
 
-{#each inputItems as { id, value }, index (id)}
-  <InputItem
-    {id}
-    {value}
-    {handleAddNewInput}
-    handleInputChange={(event) => {
-      handleInputChange(event, index);
-    }}
-  />
-{/each}
-
-<AddButton disabled={!isLastInputPopulated} {handleAddNewInput} />
-
-<ol>
-  {#each pickedItems as { id, value } (id)}
-    <li>
+  {#each inputItems as { id, value }, index (id)}
+    <InputItem
+      {id}
       {value}
-    </li>
+      {handleAddNewInput}
+      handleInputChange={(event) => {
+        handleInputChange(event, index);
+      }}
+    />
   {/each}
-</ol>
 
-<ResetButton disabled={pickedItems.length < 1} {handleResetPickedItems} />
+  <AddButton disabled={!isLastInputPopulated} {handleAddNewInput} />
+
+  {#if hasPickedItems}
+    <ol>
+      {#each pickedItems as { id, value } (id)}
+        <li>
+          {value}
+        </li>
+      {/each}
+    </ol>
+  {/if}
+
+  <ResetButton disabled={!hasPickedItems} {handleResetPickedItems} />
+</main>
+
+<style>
+  :global(*) {
+    box-sizing: border-box;
+    font-size: 1.25rem;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  :global(body) {
+    margin: 0;
+  }
+
+  :global(div#app) {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #f7f2e6;
+    opacity: 0.8;
+    background-image: radial-gradient(#f7a145 0.5px, transparent 0.5px),
+      radial-gradient(#f7a145 0.5px, #f7f2e6 0.5px);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+  }
+
+  main {
+    padding: 1.5rem;
+    border-radius: 2rem;
+    background: white;
+  }
+</style>

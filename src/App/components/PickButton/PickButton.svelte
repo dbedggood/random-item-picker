@@ -3,5 +3,13 @@
   export let handlePickItem;
 </script>
 
-<button id="pick-button" {disabled} on:click={handlePickItem}> pick </button>
-a random option
+<div>
+  <button id="pick-button" {disabled} on:click={handlePickItem}> pick </button>
+  a random option
+</div>
+
+<style>
+  div {
+    margin-bottom: 0.5rem;
+  }
+</style>
