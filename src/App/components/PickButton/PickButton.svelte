@@ -4,7 +4,7 @@
 </script>
 
 <div>
-  <button id="pick-button" {disabled} on:click={handlePickItem}> pick </button>
+  <button {disabled} on:click={handlePickItem}> pick </button>
   a random option
 </div>
 

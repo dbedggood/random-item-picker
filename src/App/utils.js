@@ -35,10 +35,8 @@ export function getRandomInt(max) {
 
 export async function updateFocus() {
   await tick;
-  if (document.activeElement !== document.getElementById("pick-button")) {
-    let inputs = document.getElementsByTagName("input");
-    inputs[inputs.length - 1].focus();
-  }
+  let inputs = document.getElementsByTagName("input");
+  inputs[inputs.length - 1].focus();
 }
 
 export function getDefaultSauces() {

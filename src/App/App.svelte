@@ -46,7 +46,6 @@
     pickedItems = [...pickedItems, inputItems[pickedInputItemIndex]];
     if (inputItems.length > 1) {
       inputItems = removeItemFromArray(inputItems, pickedInputItemIndex);
-      updateFocus();
     } else {
       inputItems[0] = getNewInputItem();
     }
