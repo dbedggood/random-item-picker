@@ -12,6 +12,7 @@
   let inputItems = [...getDefaultSauces(), getNewInputItem()];
   $: isFirstInputPopulated = inputItems.at(0).value.trim();
   $: isLastInputPopulated = inputItems.at(-1).value.trim();
+
   let pickedItems = [];
   $: hasPickedItems = pickedItems.length > 0;
 
@@ -21,6 +22,7 @@
       ({ value }) => value.trim() === ""
     );
     const inputItemsLastIndex = inputItems.length - 1;
+
     if (hasEmptyInputs && firstEmptyInputIndex !== inputItemsLastIndex) {
       inputItems = removeItemFromArray(inputItems, firstEmptyInputIndex);
       updateFocus();
@@ -43,6 +45,7 @@
   function handlePickItem() {
     const populatedInputItems = inputItems.filter(({ value }) => value.trim());
     const pickedInputItemIndex = getRandomInt(populatedInputItems.length);
+
     pickedItems = [...pickedItems, inputItems[pickedInputItemIndex]];
     if (inputItems.length > 1) {
       inputItems = removeItemFromArray(inputItems, pickedInputItemIndex);
@@ -52,7 +55,15 @@
   }
 
   function handleResetPickedItems() {
-    inputItems = [...inputItems, ...pickedItems, getNewInputItem()];
+    const populatedInputItemsEndIndex = isLastInputPopulated
+      ? inputItems.length
+      : -1;
+
+    inputItems = [
+      ...inputItems.slice(0, populatedInputItemsEndIndex),
+      ...pickedItems,
+    ];
+
     pickedItems = [];
   }
 
