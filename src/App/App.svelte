@@ -7,7 +7,13 @@
     getRandomInt,
     removeItemFromArray,
   } from "./utils";
-  import { AddButton, InputItem, PickButton, ReturnButton } from "./components";
+  import {
+    AddButton,
+    InputItem,
+    PickButton,
+    PickedItem,
+    ReturnButton,
+  } from "./components";
 
   let inputItems = [...getDefaultSauces(), getNewInputItem()];
   $: isFirstInputPopulated = inputItems.at(0).value.trim();
@@ -86,15 +92,11 @@
 
   <AddButton disabled={!isLastInputPopulated} {handleAddNewInput} />
 
-  {#if hasPickedItems}
-    <ol>
-      {#each pickedItems as { id, value } (id)}
-        <li>
-          {value}
-        </li>
-      {/each}
-    </ol>
-  {/if}
+  <ol>
+    {#each pickedItems as { id, value } (id)}
+      <PickedItem {value} />
+    {/each}
+  </ol>
 
   <ReturnButton disabled={!hasPickedItems} {handleReturnPickedItems} />
 </main>
@@ -121,6 +123,11 @@
     padding: 1.5rem;
     border-radius: 2rem;
     background: white;
+  }
+
+  ol {
+    margin: 0;
+    padding: 1rem;
   }
 
   @media (min-width: 500px) {

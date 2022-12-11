@@ -1,11 +1,13 @@
 <script>
+  import { slide } from "svelte/transition";
+
   export let id;
   export let value;
   export let handleInputChange;
   export let handleAddNewInput;
 </script>
 
-<div>
+<div transition:slide>
   <input
     {id}
     {value}
