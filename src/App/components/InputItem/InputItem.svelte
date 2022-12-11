@@ -1,5 +1,6 @@
 <script>
   import { slide } from "svelte/transition";
+  import { TRANSITION_DURATION } from "../../constants";
 
   export let id;
   export let value;
@@ -7,7 +8,7 @@
   export let handleAddNewInput;
 </script>
 
-<div transition:slide>
+<div transition:slide={{ duration: TRANSITION_DURATION }}>
   <input
     {id}
     {value}
