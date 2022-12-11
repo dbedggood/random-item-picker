@@ -7,7 +7,7 @@
     getRandomInt,
     removeItemFromArray,
   } from "./utils";
-  import { AddButton, InputItem, PickButton, ResetButton } from "./components";
+  import { AddButton, InputItem, PickButton, ReturnButton } from "./components";
 
   let inputItems = [...getDefaultSauces(), getNewInputItem()];
   $: isFirstInputPopulated = inputItems.at(0).value.trim();
@@ -54,7 +54,7 @@
     }
   }
 
-  function handleResetPickedItems() {
+  function handleReturnPickedItems() {
     const populatedInputItemsEndIndex = isLastInputPopulated
       ? inputItems.length
       : -1;
@@ -96,7 +96,7 @@
     </ol>
   {/if}
 
-  <ResetButton disabled={!hasPickedItems} {handleResetPickedItems} />
+  <ReturnButton disabled={!hasPickedItems} {handleReturnPickedItems} />
 </main>
 
 <style>
