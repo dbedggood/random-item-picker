@@ -82,6 +82,7 @@
   {#each inputItems as { id, value }, index (id)}
     <InputItem
       {id}
+      {index}
       {value}
       {handleAddNewInput}
       handleInputChange={(event) => {
