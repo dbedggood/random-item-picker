@@ -1,0 +1,9 @@
+{
+  "name": "random-item-picker",
+  "short_name": "random-item-picker",
+  "start_url": "/random-item-picker/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "lang": "en",
+  "scope": "/random-item-picker/"
+}

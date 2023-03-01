@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/random-item-picker/sw.js', { scope: '/random-item-picker/' })})}
