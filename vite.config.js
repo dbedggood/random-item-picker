@@ -7,10 +7,10 @@ export default defineConfig({
   plugins: [
     svelte(),
     VitePWA({
-      selfDestroying: true, // no service worker
+      selfDestroying: true, // disable service worker
       includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
       manifest: {
-        name: "Random Item Picker",
+        name: "random item picker",
         short_name: "random-item-picker",
         description: "An app to help you pick randomly from a list of items.",
         background_color: "#ffffff",
