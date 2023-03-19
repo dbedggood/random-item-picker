@@ -30,7 +30,7 @@ export default defineConfig({
             type: "image/png",
           },
           {
-            src: "/random-item-picker/pwa-512x512.png",
+            src: "/random-item-picker/maskable-icon.png",
             sizes: "512x512",
             type: "image/png",
             purpose: "any maskable",
