@@ -23,10 +23,24 @@
       }
     }}
   />
+  <button
+    disabled={value === ""}
+    on:click={() => {
+      // TODO: refactor
+      const fakeEmptyInputEvent = {
+        target: {
+          value: "",
+        },
+      };
+      handleInputChange(fakeEmptyInputEvent, index);
+    }}>remove</button
+  >
 </div>
 
 <style>
   div {
+    display: flex;
     margin-bottom: 0.5rem;
+    gap: 0.5rem;
   }
 </style>
