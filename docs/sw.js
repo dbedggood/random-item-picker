@@ -1,14 +1,1 @@
-
-self.addEventListener('install', function(e) {
-  self.skipWaiting();
-});
-self.addEventListener('activate', function(e) {
-  self.registration.unregister()
-    .then(function() {
-      return self.clients.matchAll();
-    })
-    .then(function(clients) {
-      clients.forEach(client => client.navigate(client.url))
-    });
-});
-    
+if(!self.define){let e,i={};const s=(s,n)=>(s=new URL(s+".js",n).href,i[s]||new Promise((i=>{if("document"in self){const e=document.createElement("script");e.src=s,e.onload=i,document.head.appendChild(e)}else e=s,importScripts(s),i()})).then((()=>{let e=i[s];if(!e)throw new Error(`Module ${s} didn’t register its module`);return e})));self.define=(n,r)=>{const c=e||("document"in self?document.currentScript.src:"")||location.href;if(i[c])return;let o={};const a=e=>s(e,c),t={module:{uri:c},exports:o,require:a};i[c]=Promise.all(n.map((e=>t[e]||a(e)))).then((e=>(r(...e),o)))}}define(["./workbox-7369c0e1"],(function(e){"use strict";self.addEventListener("message",(e=>{e.data&&"SKIP_WAITING"===e.data.type&&self.skipWaiting()})),e.precacheAndRoute([{url:"assets/index.652a94ae.js",revision:null},{url:"assets/index.e3ef0fa6.css",revision:null},{url:"index.html",revision:"d4a236fe02da6c299086aa9cc631be93"},{url:"registerSW.js",revision:"ecbe4ead21bd4cc869a00aadb87239aa"},{url:"favicon.ico",revision:"ebb716018bccc25cd2af2a698c141d6a"},{url:"apple-touch-icon.png",revision:"20d0ac52f55a30315ca0f3e90c7e0014"},{url:"masked-icon.png",revision:"f5fa68f4ef00ad213a94067e8a99ad68"},{url:"manifest.webmanifest",revision:"5271654fb791631d56c649549a770f06"}],{}),e.cleanupOutdatedCaches(),e.registerRoute(new e.NavigationRoute(e.createHandlerBoundToURL("index.html")))}));

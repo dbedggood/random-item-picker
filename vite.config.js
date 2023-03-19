@@ -11,7 +11,6 @@ export default defineConfig({
   plugins: [
     svelte(),
     VitePWA({
-      selfDestroying: true, // disable service worker
       includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.png"],
       manifest: {
         name: "random item picker",
