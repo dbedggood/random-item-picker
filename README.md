@@ -1,4 +1,4 @@
-# Random Item Picker
+# 🌯 [random item picker](https://dbedggood.github.io/random-item-picker/)
 
 - click add to add a new option to pick from
 - click pick to pick a random item and remove it from the list
