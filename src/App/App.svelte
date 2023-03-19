@@ -2,10 +2,11 @@
   import { onMount } from "svelte";
   import {
     updateFocus,
-    getDefaultSauces,
+    getInitialInputItems,
     getNewInputItem,
     getRandomInt,
     removeItemFromArray,
+    storeInputItemsToLocalStorage,
   } from "./utils";
   import {
     AddButton,
@@ -15,7 +16,7 @@
     ReturnButton,
   } from "./components";
 
-  let inputItems = [...getDefaultSauces(), getNewInputItem()];
+  let inputItems = [...getInitialInputItems(), getNewInputItem()];
   $: isFirstInputPopulated = inputItems.at(0).value.trim();
   $: isLastInputPopulated = inputItems.at(-1).value.trim();
 
@@ -69,6 +70,8 @@
       ...inputItems.slice(0, populatedInputItemsEndIndex),
       ...pickedItems,
     ];
+
+    storeInputItemsToLocalStorage(inputItems);
 
     pickedItems = [];
   }

@@ -1,4 +1,5 @@
 import { tick } from "svelte";
+import { SAUCES } from "./constants";
 
 function S4() {
   return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
@@ -39,15 +40,18 @@ export async function updateFocus() {
   inputs[inputs.length - 1].focus();
 }
 
-export function getDefaultSauces() {
-  return [
-    "hummus",
-    "garlic yoghurt",
-    "sweet chilli",
-    "tomato sauce",
-    "bbq sauce",
-    "mint sauce",
-    "aioli",
-    "mayo",
-  ].map((sauce) => ({ id: getUniqueId(), value: sauce }));
+function getSauces() {
+  return SAUCES.map((sauce) => ({ id: getUniqueId(), value: sauce }));
+}
+
+export function getInitialInputItems() {
+  if (localStorage.length > 0) {
+    return JSON.parse(localStorage.getItem("storedInputItems"));
+  }
+
+  return getSauces();
+}
+
+export function storeInputItemsToLocalStorage(inputItems) {
+  localStorage.setItem("storedInputItems", JSON.stringify(inputItems));
 }
