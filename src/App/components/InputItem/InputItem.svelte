@@ -40,7 +40,11 @@
 <style>
   div {
     display: flex;
-    margin-bottom: 0.5rem;
     gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  input {
+    min-width: 100px;
   }
 </style>
