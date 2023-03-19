@@ -16,7 +16,7 @@ export default defineConfig({
         scope: "/random-item-picker/",
         start_url: "/random-item-picker/",
         name: "random item picker",
-        short_name: "random-item-picker",
+        short_name: "random item picker",
         description: "An app to help you pick randomly from a list of items.",
         background_color: "#ffffff",
         theme_color: "#ffffff",
