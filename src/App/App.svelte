@@ -32,7 +32,6 @@
 
     if (hasEmptyInputs && firstEmptyInputIndex !== inputItemsLastIndex) {
       inputItems = removeItemFromArray(inputItems, firstEmptyInputIndex);
-      updateFocus();
     }
   }
 
