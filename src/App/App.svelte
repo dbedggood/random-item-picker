@@ -109,6 +109,7 @@
     box-sizing: border-box;
     font-size: 1.25rem;
     font-family: Arial, Helvetica, sans-serif;
+    touch-action: manipulation;
   }
 
   :global(body) {
@@ -120,10 +121,6 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-  }
-
-  :global(button) {
-    touch-action: manipulation;
   }
 
   main {
