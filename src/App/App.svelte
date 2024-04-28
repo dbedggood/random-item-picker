@@ -122,6 +122,10 @@
     align-items: flex-start;
   }
 
+  :global(button) {
+    touch-action: manipulation;
+  }
+
   main {
     width: 100%;
     padding: 1.5rem;
@@ -141,7 +145,9 @@
       background-image: radial-gradient(#f7a145 0.5px, transparent 0.5px),
         radial-gradient(#f7a145 0.5px, #f7f2e6 0.5px);
       background-size: 20px 20px;
-      background-position: 0 0, 10px 10px;
+      background-position:
+        0 0,
+        10px 10px;
     }
 
     main {
