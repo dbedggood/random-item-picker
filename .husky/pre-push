@@ -1,2 +1,1 @@
-npm version major -no-git-tag-version
-git add package*
+npm version major -m "v%s"
