@@ -26,7 +26,7 @@
   <button
     disabled={value === ""}
     on:click={() => {
-      // TODO: refactor
+      // TODO: refactor (it's setting the input to an empty string to delete it)
       const fakeEmptyInputEvent = {
         target: {
           value: "",
