@@ -1,12 +1,13 @@
 <script>
   import { onMount } from "svelte";
   import {
-    updateFocus,
+    getAllItems,
     getInitialInputItems,
     getNewInputItem,
     getRandomInt,
     removeItemFromArray,
     storeInputItemsToLocalStorage,
+    updateFocus,
   } from "./utils";
   import {
     AddButton,
@@ -17,8 +18,8 @@
   } from "./components";
 
   let inputItems = [...getInitialInputItems(), getNewInputItem()];
-  $: isFirstInputPopulated = inputItems.at(0).value.trim();
-  $: isLastInputPopulated = inputItems.at(-1).value.trim();
+  $: isFirstInputPopulated = Boolean(inputItems.at(0).value);
+  $: isLastInputPopulated = Boolean(inputItems.at(-1).value);
 
   let pickedItems = [];
   $: hasPickedItems = pickedItems.length > 0;
@@ -46,6 +47,8 @@
       inputItems = [...inputItems, getNewInputItem()];
     }
     updateFocus();
+
+    storeInputItemsToLocalStorage(getAllItems(inputItems, pickedItems));
   }
 
   function handlePickItem() {
@@ -58,20 +61,13 @@
     } else {
       inputItems[0] = getNewInputItem();
     }
+
+    storeInputItemsToLocalStorage(getAllItems(inputItems, pickedItems));
   }
 
   function handleReturnPickedItems() {
-    const populatedInputItemsEndIndex = isLastInputPopulated
-      ? inputItems.length
-      : -1;
-
-    inputItems = [
-      ...inputItems.slice(0, populatedInputItemsEndIndex),
-      ...pickedItems,
-    ];
-
+    inputItems = getAllItems(inputItems, pickedItems);
     storeInputItemsToLocalStorage(inputItems);
-
     pickedItems = [];
   }
 

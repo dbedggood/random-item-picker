@@ -22,22 +22,12 @@ function getUniqueId() {
   );
 }
 
-export function getNewInputItem() {
-  return { id: getUniqueId(), value: "" };
-}
+export function getAllItems(inputItems, pickedItems) {
+  const populatedInputItemsEndIndex = Boolean(inputItems.at(-1).value)
+    ? inputItems.length
+    : -1;
 
-export function removeItemFromArray(array, index) {
-  return [...array.slice(0, index), ...array.slice(index + 1)];
-}
-
-export function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
-}
-
-export async function updateFocus() {
-  await tick;
-  let inputs = document.getElementsByTagName("input");
-  inputs[inputs.length - 1].focus();
+  return [...inputItems.slice(0, populatedInputItemsEndIndex), ...pickedItems];
 }
 
 function getSauces() {
@@ -52,6 +42,24 @@ export function getInitialInputItems() {
   return getSauces();
 }
 
+export function getNewInputItem() {
+  return { id: getUniqueId(), value: "" };
+}
+
+export function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+export function removeItemFromArray(array, index) {
+  return [...array.slice(0, index), ...array.slice(index + 1)];
+}
+
 export function storeInputItemsToLocalStorage(inputItems) {
   localStorage.setItem("storedInputItems", JSON.stringify(inputItems));
+}
+
+export async function updateFocus() {
+  await tick;
+  let inputs = document.getElementsByTagName("input");
+  inputs[inputs.length - 1].focus();
 }
