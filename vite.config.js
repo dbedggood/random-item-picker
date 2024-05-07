@@ -8,6 +8,9 @@ export default defineConfig({
   build: {
     outDir: "docs",
   },
+  define: {
+    APP_VERSION: JSON.stringify(process.env.npm_package_version),
+  },
   plugins: [
     svelte(),
     VitePWA({
